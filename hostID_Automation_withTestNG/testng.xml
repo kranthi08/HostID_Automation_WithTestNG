@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="Host ID Automation">
+  <test name="HostID_LoginPage_Validations">
+  	<parameter name="browser" value="chrome"></parameter>
+  	<parameter name="url" value="https://www.google.co.in/"></parameter>
+    <classes>
+      <class name="com.HostID.Automation.TestCases.HostID_LoginPage_Validations"/>
+    </classes>
+    </test>
+</suite> <!-- Suite -->
