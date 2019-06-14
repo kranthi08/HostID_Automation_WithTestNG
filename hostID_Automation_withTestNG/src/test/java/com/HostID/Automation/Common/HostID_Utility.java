@@ -1,5 +1,6 @@
 package com.HostID.Automation.Common;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -144,7 +145,6 @@ public class HostID_Utility
 	//======================================================================================================================
 	public void VerifyWebElementExist(By strItem)
 	{
-		@SuppressWarnings("unused")
 		boolean boolVerifyWebElementExist = false;
 		try
 		{
@@ -157,6 +157,10 @@ public class HostID_Utility
 		catch(Exception e)
 		{
 			System.out.println("VerifyWebElementExist --- "+e.getMessage());
+		}
+		if(boolVerifyWebElementExist == false)
+		{
+			System.out.println("Searching for the Element - is not displayed");
 		}
 	}
 	//======================================================================================================================
@@ -426,6 +430,47 @@ public class HostID_Utility
 				}
 		    }
 		}
-	
+		//======================================================================================================================
+		//Get the data from Financial Institution Sheet
+		//======================================================================================================================
+		public ArrayList<Object[]> getTestDataFromFinancialInstitutionSheet()
+		{
+			Xls_Reader reader = null;
+			ArrayList<Object[]> myData = new ArrayList<Object[]>();
+			try
+			{
+				reader = new Xls_Reader(System.getProperty("user.dir")+"\\TestData\\TestData_HostID.xlsx");
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			for(int rowNum = 2;rowNum<= reader.getRowCount("Financial_Institution");rowNum++)
+			{
+				String Institution_Name	= reader.getCellData("Financial_Institution", "Institution_Name", rowNum);
+				String FI_Number = reader.getCellData("Financial_Institution", "FI_Number", rowNum);	
+				String Address_Line1 = reader.getCellData("Financial_Institution", "Address_Line1", rowNum);	
+				String Address_Line2 = reader.getCellData("Financial_Institution", "Address_Line2", rowNum);	
+				String City = reader.getCellData("Financial_Institution", "City", rowNum);	
+				String State = reader.getCellData("Financial_Institution", "State", rowNum);	
+				String ZIP = reader.getCellData("Financial_Institution", "ZIP", rowNum);	
+				String ZIP_SUFFIX = reader.getCellData("Financial_Institution", "ZIP_SUFFIX", rowNum);	
+				String Corporate_Structure = reader.getCellData("Financial_Institution", "Corporate_Structure", rowNum);	
+				String TAX_Identification_Number = reader.getCellData("Financial_Institution", "TAX_Identification_Number", rowNum);	
+				String OmniBus_Account_Number = reader.getCellData("Financial_Institution", "OmniBus_Account_Number", rowNum);	
+				String Special_Instructions = reader.getCellData("Financial_Institution", "Special_Instructions", rowNum);	
+				String Omni_Serve = reader.getCellData("Financial_Institution", "Omni_Serve", rowNum);
+				String NSCC_ID = reader.getCellData("Financial_Institution", "NSCC_ID", rowNum);
+				String SuccessMessage_FailureMessage = reader.getCellData("Financial_Institution", "SuccessMessage_FailureMessage", rowNum);
+				String MessageKeyword = reader.getCellData("Financial_Institution", "MessageKeyword", rowNum);
+				
+				Object ob[] = {Institution_Name,FI_Number,Address_Line1,Address_Line2,City,State,ZIP,ZIP_SUFFIX,Corporate_Structure,TAX_Identification_Number,OmniBus_Account_Number,Special_Instructions,Omni_Serve,NSCC_ID,SuccessMessage_FailureMessage,MessageKeyword};
+				myData.add(ob);
+			}
+			return myData;
+		}
+		
+		
+		//======================================================================================================================
 	// End Of Class
 }

@@ -6,5 +6,17 @@
     <classes>
       <class name="com.HostID.Automation.TestCases.HostID_LoginPage_Validations"/>
     </classes>
-    </test>
+  </test>
+  
+  <test>
+  	<parameter name="browser" value="chrome"></parameter>
+  	<parameter name="url" value="https://www.google.co.in/"></parameter>
+  	
+  	<parameter name="initials" value="initialsValue"></parameter>
+  	<parameter name="networkPassword" value="networkPassword"></parameter>
+  	
+  	<classes>
+      <class name="com.HostID.Automation.TestCases.HostID_FinancialInstitution_Creation_And_Validations"/>
+    </classes>
+  </test>
 </suite> <!-- Suite -->
