@@ -2,21 +2,17 @@ package com.HostID.Automation.TestCases;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-
 import com.HostID.Automation.Common.HostID_SharedResources;
 import com.HostID.Automation.Common.HostID_Utility;
 import com.HostID.Automation.Pages.Financial_Institution_Details_Selector;
 import com.HostID.Automation.Pages.Financial_Institution_Home_Selector;
 import com.HostID.Automation.Pages.HostID_HomePage_Selector;
-
 
 public class HostID_FinancialInstitution_Creation_And_Validations 
 {
@@ -28,9 +24,9 @@ public class HostID_FinancialInstitution_Creation_And_Validations
 	private Financial_Institution_Home_Selector fiHomeSelector;
 	private Financial_Institution_Details_Selector fiDetailsSelector;
 	
-	@BeforeClass
+	@BeforeMethod
 	@Parameters({"browser","url"})
-	public void init(String strBrowser,String strUrl) throws Throwable 
+	public void initClasses(String strBrowser,String strUrl) throws Throwable 
 	{
 		sharedResources = new HostID_SharedResources();
 		sharedResources.beforeClass(strBrowser, strUrl);
@@ -41,32 +37,25 @@ public class HostID_FinancialInstitution_Creation_And_Validations
 		fiDetailsSelector = new Financial_Institution_Details_Selector(sharedResources,hostUtility);
 	}
 	@BeforeMethod
-	@Parameters({"initials","networkPassword","browser","url"})
-	public void performLogin(String initials,String networkPassword,String strBrowser,String strUrl) throws Throwable
-	{
-		if(HostID_SharedResources.performAppLaunch)
+	@Parameters({"browser","url","initials","networkPassword"})
+	public void performLogin(String strBrowser,String strUrl,String initials,String networkPassword) throws Throwable
+	{	
+		if((HostID_SharedResources.performAppLaunch) && !(sharedResources.getDriver().toString().equals(null)))
+		{			
+			hostIDhomepage.verifyImageExistance();
+			hostIDhomepage.LoginPage_enterTextIntoInitials(initials);
+			hostIDhomepage.LoginPage_enterTextIntoNetworkPassword(networkPassword);
+			hostIDhomepage.LoginPage_ClickonLogInButton();				
+			fiHomeSelector.waitForPayoutslink();
+		}
+		else if((HostID_SharedResources.performAppLaunch) && (sharedResources.getDriver().toString().equals(null)))
 		{
-			if(!(sharedResources.getDriver().toString().equals(null)))
-			{			
-				hostIDhomepage.verifyImageExistance();
-				hostIDhomepage.LoginPage_enterTextIntoInitials(initials);
-				hostIDhomepage.LoginPage_enterTextIntoNetworkPassword(networkPassword);
-				hostIDhomepage.LoginPage_ClickonLogInButton();				
-				fiHomeSelector.waitForPayoutslink();
-			}
-			else if(HostID_SharedResources.performAppLaunch)
-			{
-				if(sharedResources.getDriver().toString().equals(null))
-				{
-					sharedResources.beforeClass(strBrowser, strUrl);
-					
-					hostIDhomepage.verifyImageExistance();
-					hostIDhomepage.LoginPage_enterTextIntoInitials(initials);
-					hostIDhomepage.LoginPage_enterTextIntoNetworkPassword(networkPassword);
-					hostIDhomepage.LoginPage_ClickonLogInButton();				
-					fiHomeSelector.waitForPayoutslink();
-				}
-			}
+			sharedResources.beforeClass(strBrowser, strUrl);					
+			hostIDhomepage.verifyImageExistance();
+			hostIDhomepage.LoginPage_enterTextIntoInitials(initials);
+			hostIDhomepage.LoginPage_enterTextIntoNetworkPassword(networkPassword);
+			hostIDhomepage.LoginPage_ClickonLogInButton();				
+			fiHomeSelector.waitForPayoutslink();		
 		}
 	}
 	@AfterMethod
@@ -75,14 +64,14 @@ public class HostID_FinancialInstitution_Creation_And_Validations
 		sharedResources.tearDown();
 	}
 	
-	@DataProvider
+	@DataProvider(name = "FinancialInstitutionData")
 	public Iterator<Object[]> getFinancialInstitutionTestData()
 	{
-		ArrayList<Object[]> fiTestData = hostUtility.getTestDataFromFinancialInstitutionSheet();
+		ArrayList<Object[]> fiTestData = HostID_Utility.getTestDataFromFinancialInstitutionSheet();
 		return fiTestData.iterator();
 	}
 	
-	@Test(dataProvider="getFinancialInstitutionTestData")
+	@Test(dataProvider="FinancialInstitutionData")
 	public void fi_Creation_And_Validations(String Institution_Name,String FI_Number,String Address_Line1,String Address_Line2,String City,String State,String ZIP,String ZIP_SUFFIX,String Corporate_Structure,String TAX_Identification_Number,String OmniBus_Account_Number,String Special_Instructions,String Omni_Serve,String NSCC_ID,String SuccessMessage_FailureMessage,String MessageKeyword) throws Throwable
 	{
 		hostUtility.createFinancialInstitution("Create->Institution");

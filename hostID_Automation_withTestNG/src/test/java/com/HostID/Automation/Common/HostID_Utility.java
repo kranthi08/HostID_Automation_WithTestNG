@@ -433,7 +433,7 @@ public class HostID_Utility
 		//======================================================================================================================
 		//Get the data from Financial Institution Sheet
 		//======================================================================================================================
-		public ArrayList<Object[]> getTestDataFromFinancialInstitutionSheet()
+		public static ArrayList<Object[]> getTestDataFromFinancialInstitutionSheet()
 		{
 			Xls_Reader reader = null;
 			ArrayList<Object[]> myData = new ArrayList<Object[]>();
@@ -469,8 +469,6 @@ public class HostID_Utility
 			}
 			return myData;
 		}
-		
-		
 		//======================================================================================================================
 	// End Of Class
 }
