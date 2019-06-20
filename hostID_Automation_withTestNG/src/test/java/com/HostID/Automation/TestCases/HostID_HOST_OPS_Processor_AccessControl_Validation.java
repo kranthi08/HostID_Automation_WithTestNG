@@ -23,9 +23,26 @@ public class HostID_HOST_OPS_Processor_AccessControl_Validation
 	public String filename = System.getProperty("user.dir")+"\\TestData\\TestData_HostID.xlsx";
 	
 	@BeforeClass
-	@Parameters({"browser","url","initials","networkPassword"})
-	public void init(String strBrowser,String strUrl,String initials,String networkPassword) throws Throwable 
+	//@Parameters({"browser","url","initials","networkPassword"})
+	public void init() throws Throwable //String strBrowser,String strUrl,String initials,String networkPassword
 	{
+		HostID_Utility.ReadProperties();
+
+		String strBrowser = HostID_Utility.pf.getProperty("BrowserName");
+		String strEnvironment = HostID_Utility.pf.getProperty("Environment");
+		String strUrl = null;
+		if(strEnvironment.equalsIgnoreCase("dev"))
+		{
+			strUrl = HostID_Utility.pf.getProperty("Dev_URL");
+		}
+		else if(strEnvironment.equalsIgnoreCase("qc"))
+		{
+			strUrl = HostID_Utility.pf.getProperty("QC_URL");
+		}
+		
+		String initials = HostID_Utility.pf.getProperty("HOST_OPS_Processor_Initials");;
+		String networkPassword = HostID_Utility.pf.getProperty("HOST_OPS_Processor_NetworkPassword");
+		
 		sharedResources = new HostID_SharedResources();
 		sharedResources.beforeClass(strBrowser, strUrl);
 		hostUtility = new HostID_Utility(sharedResources); 

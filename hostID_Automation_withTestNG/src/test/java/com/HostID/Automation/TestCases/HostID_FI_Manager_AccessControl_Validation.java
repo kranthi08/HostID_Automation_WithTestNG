@@ -40,7 +40,7 @@ public class HostID_FI_Manager_AccessControl_Validation
 			strUrl = HostID_Utility.pf.getProperty("QC_URL");
 		}
 		String initials = HostID_Utility.pf.getProperty("FI_Manager_Initials");;
-		String networkPassword = HostID_Utility.pf.getProperty("FI_Manager_NetworkPassword");;
+		String networkPassword = HostID_Utility.pf.getProperty("FI_Manager_NetworkPassword");
 		sharedResources = new HostID_SharedResources();
 		sharedResources.beforeClass(strBrowser, strUrl);
 		hostUtility = new HostID_Utility(sharedResources); 
@@ -48,15 +48,15 @@ public class HostID_FI_Manager_AccessControl_Validation
 		fiHomepage = new Financial_Institution_Home_Selector(sharedResources,hostUtility);
 		AccessControl = new AccessControl_Selector(sharedResources,hostUtility);
 		
-		//hostIDhomepage.verifyImageExistance();
+		hostIDhomepage.verifyImageExistance();
 		System.out.println("Image");
-		//hostIDhomepage.LoginPage_enterTextIntoInitials(initials);
+		hostIDhomepage.LoginPage_enterTextIntoInitials(initials);
 		System.out.println("Initials");
-		//hostIDhomepage.LoginPage_enterTextIntoNetworkPassword(networkPassword);
+		hostIDhomepage.LoginPage_enterTextIntoNetworkPassword(networkPassword);
 		System.out.println("network password");
-		//hostIDhomepage.LoginPage_ClickonLogInButton();
+		hostIDhomepage.LoginPage_ClickonLogInButton();
 		System.out.println("login");
-		//fiHomepage.waitForPayoutslink();
+		fiHomepage.waitForPayoutslink();
 		System.out.println("payout");
 	}
 	@AfterClass
