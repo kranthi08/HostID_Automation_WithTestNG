@@ -1,8 +1,11 @@
 package com.HostID.Automation.Common;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
@@ -18,6 +21,7 @@ public class HostID_Utility
 {
 	HostID_SharedResources sharedResources;
 	public WebDriver driver;
+	public static Properties pf = null;
 	
 	public HostID_Utility(HostID_SharedResources sharedResources)
 	{
@@ -470,5 +474,14 @@ public class HostID_Utility
 			return myData;
 		}
 		//======================================================================================================================
+		
+		public static void ReadProperties() throws IOException
+		{
+			pf = new Properties();
+			FileInputStream f1= new FileInputStream(System.getProperty("user.dir")+"\\Resources\\HostID.properties");
+			//System.out.println(System.getProperty("user.dir") + "\\Resources\\HostID.properties");
+			pf.load(f1);		
+		}
+		
 	// End Of Class
 }

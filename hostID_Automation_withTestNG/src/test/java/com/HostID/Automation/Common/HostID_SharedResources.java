@@ -12,33 +12,33 @@ public class HostID_SharedResources
 {
 	public static ThreadLocal<WebDriver> Tdriver = new ThreadLocal<WebDriver>();
 	public static boolean performAppLaunch;
-	
+	public WebDriver driver;
 	public void beforeClass(String browser,String url) throws IOException
 	{		
-		WebDriver driver;
-		try
-		{
-			if(getDriver().toString().equals(null))
-			{
-				performAppLaunch = true;
-			}
-			else
-			{
-				performAppLaunch = false;
-				return;
-			}
-		}
-		catch(Exception e)
-		{
+		//WebDriver driver;
+		//try
+		//{
+			//if(getDriver().toString().equals(null))
+			//{
+//				performAppLaunch = true;
+//			}
+//			else
+//		{
+//				performAppLaunch = false;
+//				return;
+//			}
+//		}
+//		catch(Exception e)
+//		{
 			WindowsUtils.killByName("chromedriver.exe");
 			driver=null;
 			performAppLaunch = true;
 			System.out.println("Driver set to null");
-		}		
+//		}		
 		String myBrowser = 	browser;
 		String appURL = url;
 		driver=null;
-		if(myBrowser.equals("chrome"))
+		if(myBrowser.equalsIgnoreCase("chrome"))
 		{
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"\\drivers\\chromedriver.exe");
 			driver = new ChromeDriver();
@@ -70,7 +70,7 @@ public class HostID_SharedResources
 	}
 	public void tearDown()
 	{
-		getDriver().close();
-		getDriver().quit();
+		driver.close();
+		driver.quit();
 	}
 }
