@@ -60,6 +60,7 @@ public class HostID_SharedResources
 		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 	}
+	
 	public WebDriver getDriver()
 	{
 		return Tdriver.get();

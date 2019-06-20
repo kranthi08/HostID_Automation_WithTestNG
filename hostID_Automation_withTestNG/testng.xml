@@ -1,82 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Host ID Automation">
+  <!-- 
   <listeners>
   	<listener class-name="com.HostID.Automation.RetryAnalyzer.TransformAnnotation"/>
-  </listeners>
+  </listeners>   -->
+  
   <test name="HostID_LoginPage_Validations">
-  	<parameter name="browser" value="chrome"></parameter>
-  	<parameter name="url" value="https://www.google.co.in/"></parameter>
     <classes>
       <class name="com.HostID.Automation.TestCases.HostID_LoginPage_Validations"/>
     </classes>
   </test>
-  
-  <test name = "FinancialInstitution_Creation_And_Validations">
-  	<parameter name="browser" value="chrome"></parameter>
-  	<parameter name="url" value="https://www.google.co.in/"></parameter>
-  	<parameter name="initials" value="initialsValue"></parameter>
-  	<parameter name="networkPassword" value="networkPassword"></parameter>
+    
+   <test name = "FinancialInstitution_Creation_And_Validations">
   	<classes>
       <class name="com.HostID.Automation.TestCases.HostID_FinancialInstitution_Creation_And_Validations"/>
     </classes>
   </test>
   
-  <test name ="HostID_FI_Manager_AccessControl_Validation">
-  	<parameter name="browser" value="chrome"></parameter>
-  	<parameter name="url" value="https://www.google.co.in/"></parameter>
-  	<parameter name="initials" value="initialsValue"></parameter>
-  	<parameter name="networkPassword" value="networkPassword"></parameter>
+  <test name = "HostID_FI_Manager_AccessControl_Validation">
   	<classes>
-  		<class name = "com.HostID.Automation.TestCases.HostID_FI_Manager_AccessControl_Validation">
-  		</class>
-  	</classes>
-  </test>
-  
-  <test name ="HostID_Assigner_AccessControl_Validation">
-  	<parameter name="browser" value="chrome"></parameter>
-  	<parameter name="url" value="https://www.google.co.in/"></parameter>
-  	<parameter name="initials" value="initialsValue"></parameter>
-  	<parameter name="networkPassword" value="networkPassword"></parameter>
-  	<classes>
-  		<class name = "com.HostID.Automation.TestCases.HostID_Assigner_AccessControl_Validation">
-  		</class>
-  	</classes>
-  
-  </test>
-  
-  <test name ="HostID_Processor_AccessControl_Validation">
-  	<parameter name="browser" value="chrome"></parameter>
-  	<parameter name="url" value="https://www.google.co.in/"></parameter>
-  	<parameter name="initials" value="initialsValue"></parameter>
-  	<parameter name="networkPassword" value="networkPassword"></parameter>
-  	<classes>
-  		<class name = "com.HostID.Automation.TestCases.HostID_Processor_AccessControl_Validation">
-  		</class>
-  	</classes>
-  
-  </test>
-  
-  <test name ="HostID_Approver_Sr_Approver_AccessControl_Validation">
-  	<parameter name="browser" value="chrome"></parameter>
-  	<parameter name="url" value="https://www.google.co.in/"></parameter>
-  	<parameter name="initials" value="initialsValue"></parameter>
-  	<parameter name="networkPassword" value="networkPassword"></parameter>
-  	<classes>
-  		<class name = "com.HostID.Automation.TestCases.HostID_Approver_Sr_Approver_AccessControl_Validation">
-  		</class>
-  	</classes>
-  </test>
-  
-  <test name ="HostID_HOST_OPS_Processor_AccessControl_Validation">
-  	<parameter name="browser" value="chrome"></parameter>
-  	<parameter name="url" value="https://www.google.co.in/"></parameter>
-  	<parameter name="initials" value="initialsValue"></parameter>
-  	<parameter name="networkPassword" value="networkPassword"></parameter>
-  	<classes>
-  		<class name = "com.HostID.Automation.TestCases.HostID_HOST_OPS_Processor_AccessControl_Validation">
-  		</class>
-  	</classes>
-  </test>
-  
-  
+      <class name="com.HostID.Automation.TestCases.HostID_FI_Manager_AccessControl_Validation"/>
+    </classes>
+  </test> 
+    
 </suite> <!-- Suite -->

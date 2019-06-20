@@ -22,7 +22,6 @@ public class HostID_Utility
 	HostID_SharedResources sharedResources;
 	public WebDriver driver;
 	public static Properties pf = null;
-	
 	public HostID_Utility(HostID_SharedResources sharedResources)
 	{
 		this.driver = sharedResources.getDriver();

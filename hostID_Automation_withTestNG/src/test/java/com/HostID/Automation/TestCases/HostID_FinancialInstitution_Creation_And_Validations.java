@@ -21,7 +21,6 @@ public class HostID_FinancialInstitution_Creation_And_Validations
 	private HostID_HomePage_Selector hostIDhomepage;
 	public String filename = System.getProperty("user.dir")+"\\TestData\\TestData_HostID.xlsx";
 	public static int Iteration = 0;
-	
 	private Financial_Institution_Home_Selector fiHomeSelector;
 	private Financial_Institution_Details_Selector fiDetailsSelector;
 	

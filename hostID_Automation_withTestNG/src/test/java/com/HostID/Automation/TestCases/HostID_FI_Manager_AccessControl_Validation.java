@@ -41,7 +41,6 @@ public class HostID_FI_Manager_AccessControl_Validation
 		}
 		String initials = HostID_Utility.pf.getProperty("FI_Manager_Initials");;
 		String networkPassword = HostID_Utility.pf.getProperty("FI_Manager_NetworkPassword");;
-		
 		sharedResources = new HostID_SharedResources();
 		sharedResources.beforeClass(strBrowser, strUrl);
 		hostUtility = new HostID_Utility(sharedResources); 
