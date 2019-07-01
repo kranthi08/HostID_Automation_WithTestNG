@@ -1,8 +1,7 @@
 package com.HostID.Automation.TestCases;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.HostID.Automation.Common.HostID_SharedResources;
 import com.HostID.Automation.Common.HostID_Utility;
@@ -21,11 +20,9 @@ public class HostID_FI_Manager_AccessControl_Validation
 	private Financial_Institution_Home_Selector fiHomepage;
 	public String filename = System.getProperty("user.dir")+"\\TestData\\TestData_HostID.xlsx";
 	
-	@BeforeClass
-	//@Parameters({"browser","url","initials","networkPassword"})
+	@BeforeTest
 	public void init() throws Throwable 
 	{
-		System.out.println("HostID_FI_Manager_AccessControl_Validation Test case");
 		HostID_Utility.ReadProperties();
 
 		String strBrowser = HostID_Utility.pf.getProperty("BrowserName");
@@ -41,6 +38,7 @@ public class HostID_FI_Manager_AccessControl_Validation
 		}
 		String initials = HostID_Utility.pf.getProperty("FI_Manager_Initials");;
 		String networkPassword = HostID_Utility.pf.getProperty("FI_Manager_NetworkPassword");
+		
 		sharedResources = new HostID_SharedResources();
 		sharedResources.beforeClass(strBrowser, strUrl);
 		hostUtility = new HostID_Utility(sharedResources); 
@@ -49,17 +47,12 @@ public class HostID_FI_Manager_AccessControl_Validation
 		AccessControl = new AccessControl_Selector(sharedResources,hostUtility);
 		
 		hostIDhomepage.verifyImageExistance();
-		System.out.println("Image");
 		hostIDhomepage.LoginPage_enterTextIntoInitials(initials);
-		System.out.println("Initials");
 		hostIDhomepage.LoginPage_enterTextIntoNetworkPassword(networkPassword);
-		System.out.println("network password");
 		hostIDhomepage.LoginPage_ClickonLogInButton();
-		System.out.println("login");
 		fiHomepage.waitForPayoutslink();
-		System.out.println("payout");
 	}
-	@AfterClass
+	@AfterTest
 	public void teardown()
 	{
 		sharedResources.tearDown();
@@ -69,63 +62,48 @@ public class HostID_FI_Manager_AccessControl_Validation
 	{
 		reader = new Xls_Reader(filename);
 		String strtabOrder = reader.getCellData("Access_Control", "Accessor_TAB_Order", 2);
-		String strVisibleLinks = reader.getCellData("Access_Control", "CreateTab_VisibleLinks", 2);
+		String strVisibleLinks = reader.getCellData("Access_Control", "CreateTab_VisibleLinks", 2); 
 		String strInvisibleLinks = reader.getCellData("Access_Control", "CreateTab_InvisibleLinks", 2);
 		
 		AccessControl.tabOrderVerification(strtabOrder);
-		System.out.println("tab order");
-		hostUtility.hoverTheMouseIntoElement("Create");
-		System.out.println("create");
+		AccessControl.performMouseHoverIntoCreateTab();
 		AccessControl.createTab_visibleLinkVerification(strVisibleLinks);
-		System.out.println("visible links");
 		AccessControl.createTab_invisibileLinkVerification(strInvisibleLinks);
-		System.out.println("in visible links");
 	}
 	@Test(priority=1)
 	public void import_Tab_Validations() throws Throwable
 	{
 		String strInvisibleLinks = reader.getCellData("Access_Control", "ImportTab_InvisibleLinks", 2);
-		AccessControl.verify_VisibilityOfimportTab();
-		System.out.println("import");
+		AccessControl.verify_VisibilityOfImportTab();
 		AccessControl.importTab_invisibileLinkVerification(strInvisibleLinks);
-		System.out.println("in visible links");
 	}
 	@Test(priority=2)
 	public void search_Tab_Validations() throws Throwable
 	{
 		String strVisibleLinks = reader.getCellData("Access_Control", "SearchTab_VisibleLinks", 2);
-		hostUtility.hoverTheMouseIntoElement("Search");
-		System.out.println("search");
+		AccessControl.performMouseHoverIntoSearchTab();
 		AccessControl.createTab_visibleLinkVerification(strVisibleLinks);
-		System.out.println("visible links");
 	}
 	@Test(priority=3)
 	public void exported_Tab_Validations() throws Throwable
 	{
 		String strVisibleLinks = reader.getCellData("Access_Control", "ExportedTab_VisibleLinks", 2);
-		hostUtility.hoverTheMouseIntoElement("Exported");
-		System.out.println("export");
+		AccessControl.performMouseHoverIntoExportedTab();
 		AccessControl.createTab_visibleLinkVerification(strVisibleLinks);
-		System.out.println("visible links");
 	}
 	@Test(priority=4)
 	public void jobs_Tab_Validations() throws Throwable
 	{
 		String strInvisibleLinks = reader.getCellData("Access_Control", "JobsTab_InvisibleLinks", 2);
 		AccessControl.verify_VisibilityOfJobsTab();
-		System.out.println("jobs");
 		AccessControl.jobsTab_invisibileLinkVerification(strInvisibleLinks);
-		System.out.println("in visible links");
 	}
 	@Test(priority=5)
 	public void workorders_Tab_Validations() throws Throwable
 	{
 		AccessControl.workOrdersTab_visibiltyVerification();
-		System.out.println("work orders");
 		AccessControl.workOrdersLinkClick();
-		System.out.println("work orders link");
 		AccessControl.workOderPageValidation();
-		System.out.println("work orders page valdation");
 	}
 	
 // End of class	

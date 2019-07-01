@@ -1,10 +1,9 @@
 package com.HostID.Automation.TestCases;
 
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import com.HostID.Automation.Common.HostID_SharedResources;
 import com.HostID.Automation.Common.HostID_Utility;
 import com.HostID.Automation.Common.Xls_Reader;
@@ -22,12 +21,10 @@ public class HostID_HOST_OPS_Processor_AccessControl_Validation
 	private Financial_Institution_Home_Selector fiHomepage;
 	public String filename = System.getProperty("user.dir")+"\\TestData\\TestData_HostID.xlsx";
 	
-	@BeforeClass
-	//@Parameters({"browser","url","initials","networkPassword"})
-	public void init() throws Throwable //String strBrowser,String strUrl,String initials,String networkPassword
+	@BeforeTest
+	public void init() throws Throwable
 	{
 		HostID_Utility.ReadProperties();
-
 		String strBrowser = HostID_Utility.pf.getProperty("BrowserName");
 		String strEnvironment = HostID_Utility.pf.getProperty("Environment");
 		String strUrl = null;
@@ -56,7 +53,7 @@ public class HostID_HOST_OPS_Processor_AccessControl_Validation
 		hostIDhomepage.LoginPage_ClickonLogInButton();				
 		fiHomepage.waitForPayoutslink();
 	}
-	@AfterClass
+	@AfterTest
 	public void teardown()
 	{
 		sharedResources.tearDown();
@@ -76,7 +73,7 @@ public class HostID_HOST_OPS_Processor_AccessControl_Validation
 		String strVisibleLinks = reader.getCellData("Access_Control", "ImportTab_VisibleLinks", 6);
 		String strInvisibleLinks = reader.getCellData("Access_Control", "ImportTab_InvisibleLinks", 6);
 		
-		hostUtility.hoverTheMouseIntoElement("Import");
+		AccessControl.performMouseHoverIntoImportTab();
 		AccessControl.importTab_visibileLinkVerification(strVisibleLinks);
 		AccessControl.importTab_invisibileLinkVerification(strInvisibleLinks);
 	}

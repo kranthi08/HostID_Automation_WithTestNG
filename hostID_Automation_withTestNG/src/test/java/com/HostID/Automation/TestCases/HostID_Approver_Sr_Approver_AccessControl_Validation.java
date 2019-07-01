@@ -1,8 +1,7 @@
 package com.HostID.Automation.TestCases;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import com.HostID.Automation.Common.HostID_SharedResources;
 import com.HostID.Automation.Common.HostID_Utility;
@@ -21,9 +20,8 @@ public class HostID_Approver_Sr_Approver_AccessControl_Validation
 	private Financial_Institution_Home_Selector fiHomepage;
 	public String filename = System.getProperty("user.dir")+"\\TestData\\TestData_HostID.xlsx";
 	
-	@BeforeClass
-	//@Parameters({"browser","url","initials","networkPassword"})
-	public void init() throws Throwable // String strBrowser,String strUrl,String initials,String networkPassword
+	@BeforeTest
+	public void init() throws Throwable
 	{
 		HostID_Utility.ReadProperties();
 
@@ -55,7 +53,7 @@ public class HostID_Approver_Sr_Approver_AccessControl_Validation
 		hostIDhomepage.LoginPage_ClickonLogInButton();				
 		fiHomepage.waitForPayoutslink();
 	}
-	@AfterClass
+	@AfterTest
 	public void teardown()
 	{
 		sharedResources.tearDown();
@@ -76,8 +74,9 @@ public class HostID_Approver_Sr_Approver_AccessControl_Validation
 	{
 		String strVisibleLinks = reader.getCellData("Access_Control", "ImportTab_VisibleLinks", 5);
 		String strInvisibleLinks = reader.getCellData("Access_Control", "ImportTab_InvisibleLinks", 5);
-		AccessControl.verify_VisibilityOfimportTab();
-		hostUtility.hoverTheMouseIntoElement("Import");
+		
+		AccessControl.verify_VisibilityOfImportTab();
+		AccessControl.performMouseHoverIntoImportTab();
 		AccessControl.importTab_visibileLinkVerification(strVisibleLinks);
 		AccessControl.importTab_invisibileLinkVerification(strInvisibleLinks);
 	}
@@ -85,21 +84,24 @@ public class HostID_Approver_Sr_Approver_AccessControl_Validation
 	public void search_Tab_Validations() throws Throwable
 	{
 		String strVisibleLinks = reader.getCellData("Access_Control", "SearchTab_VisibleLinks", 5);
-		hostUtility.hoverTheMouseIntoElement("Search");
+		
+		AccessControl.performMouseHoverIntoSearchTab();
 		AccessControl.createTab_visibleLinkVerification(strVisibleLinks);
 	}
 	@Test(priority=3)
 	public void exported_Tab_Validations() throws Throwable
 	{
 		String strVisibleLinks = reader.getCellData("Access_Control", "ExportedTab_VisibleLinks", 5);
-		hostUtility.hoverTheMouseIntoElement("Exported");
+		
+		AccessControl.performMouseHoverIntoExportedTab();
 		AccessControl.createTab_visibleLinkVerification(strVisibleLinks);
 	}
 	@Test(priority=4)
 	public void jobs_Tab_Validations() throws Throwable
 	{
 		String strVisibleLinks = reader.getCellData("Access_Control", "JobsTab_VisibleLinks", 5);
-		hostUtility.hoverTheMouseIntoElement("Jobs");
+		
+		AccessControl.performMouseHoverIntoJobsTab();
 		AccessControl.jobsTab_visibleLinksverification(strVisibleLinks);
 	}
 	@Test(priority=5)
