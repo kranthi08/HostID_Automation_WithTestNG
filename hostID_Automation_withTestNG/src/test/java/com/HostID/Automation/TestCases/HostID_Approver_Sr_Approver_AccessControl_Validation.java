@@ -75,7 +75,7 @@ public class HostID_Approver_Sr_Approver_AccessControl_Validation
 		String strVisibleLinks = reader.getCellData("Access_Control", "ImportTab_VisibleLinks", 5);
 		String strInvisibleLinks = reader.getCellData("Access_Control", "ImportTab_InvisibleLinks", 5);
 		
-		AccessControl.verify_VisibilityOfImportTab();
+		
 		AccessControl.performMouseHoverIntoImportTab();
 		AccessControl.importTab_visibileLinkVerification(strVisibleLinks);
 		AccessControl.importTab_invisibileLinkVerification(strInvisibleLinks);
@@ -86,7 +86,7 @@ public class HostID_Approver_Sr_Approver_AccessControl_Validation
 		String strVisibleLinks = reader.getCellData("Access_Control", "SearchTab_VisibleLinks", 5);
 		
 		AccessControl.performMouseHoverIntoSearchTab();
-		AccessControl.createTab_visibleLinkVerification(strVisibleLinks);
+		AccessControl.searchTab_visibileLinkVerification(strVisibleLinks);
 	}
 	@Test(priority=3)
 	public void exported_Tab_Validations() throws Throwable
@@ -94,7 +94,7 @@ public class HostID_Approver_Sr_Approver_AccessControl_Validation
 		String strVisibleLinks = reader.getCellData("Access_Control", "ExportedTab_VisibleLinks", 5);
 		
 		AccessControl.performMouseHoverIntoExportedTab();
-		AccessControl.createTab_visibleLinkVerification(strVisibleLinks);
+		AccessControl.exportedTab_visibileLinkVerification(strVisibleLinks);
 	}
 	@Test(priority=4)
 	public void jobs_Tab_Validations() throws Throwable

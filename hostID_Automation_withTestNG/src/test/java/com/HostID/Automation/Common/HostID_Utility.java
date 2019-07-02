@@ -270,15 +270,12 @@ public class HostID_Utility
 			int attempt=0;
 			while(attempt < 3)
 			{
-				System.out.println("hoverTheMouseIntoElement - attempt = "+attempt);
 				try
 				{
 					if(driver.findElement(oElement).isDisplayed())
 					{
-						System.out.println("Require Element Displayed");
 						WebElement element = driver.findElement(oElement);
 						String strText = element.getText();
-						System.out.println("element.getText() = "+strText);
 				        Actions action = new Actions(driver);
 				        action.moveToElement(element).build().perform();
 				        hoverthemouseintoelement = true;
